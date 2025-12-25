@@ -7,12 +7,11 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// Enable CORS for all origins (for testing/development)
-// In production, you can restrict to your frontend domain
+// Enable CORS for your frontend
 app.use(cors({
-  origin: 'https://2quick-frontend.netlify.app', // frontend URL
+  origin: 'https://2quick-frontend.netlify.app', // restrict to your frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  credentials: true, // if you use cookies or auth
+  credentials: true, // only if using cookies/auth headers
 }));
 
 // JSON parsing with size limit
@@ -23,12 +22,12 @@ app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Health check / root route
+// Root route for health check
 app.get('/', (req, res) => {
   res.send('Welcome to the E-commerce Backend API!');
 });
 
-// Error handling middleware
+// Error handling middleware (should be after routes)
 app.use(errorHandler);
 
 module.exports = app;
