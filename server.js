@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const app = require('./app');
 
-// Database Connection Function
+// MongoDB connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
@@ -16,11 +16,11 @@ const connectDB = async () => {
   }
 };
 
-// Start Server Function
+// Start server
 const startServer = () => {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 };
 
-// Initialize
+// Initialize backend
 connectDB().then(startServer);

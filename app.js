@@ -7,11 +7,11 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// Enable CORS for your frontend
+// Enable CORS for frontend
 app.use(cors({
-  origin: 'https://2quick-frontend.netlify.app', // restrict to your frontend
+  origin: 'https://2quick-frontend.netlify.app', // restrict to frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  credentials: true, // only if using cookies/auth headers
+  credentials: true, // only needed if you use cookies/auth
 }));
 
 // JSON parsing with size limit
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the E-commerce Backend API!');
 });
 
-// Error handling middleware (should be after routes)
+// Error handling middleware (after all routes)
 app.use(errorHandler);
 
 module.exports = app;
